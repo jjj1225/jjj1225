@@ -1,0 +1,50 @@
+// 策略接口
+interface AlphabetStrategy {
+    void printAlphabet();
+}
+
+// 顺序输出
+class SequentialStrategy implements AlphabetStrategy {
+    public void printAlphabet() {
+        for (char c = 'a'; c <= 'z'; c++) {
+            System.out.print(c + " ");
+        }
+    }
+}
+
+// 逆序输出
+class ReverseStrategy implements AlphabetStrategy {
+    public void printAlphabet() {
+        for (char c = 'z'; c >= 'a'; c--) {
+            System.out.print(c + " ");
+        }
+    }
+}
+
+// 上下文类
+class AlphabetPrinter {
+    private AlphabetStrategy strategy;
+    
+    public void setStrategy(AlphabetStrategy strategy) {
+        this.strategy = strategy;
+    }
+    
+    public void print() {
+        strategy.printAlphabet();
+    }
+}
+
+// 使用示例
+public class Main3 {
+    public static void main(String[] args) {
+        AlphabetPrinter printer = new AlphabetPrinter();
+        
+        printer.setStrategy(new SequentialStrategy());
+        printer.print();  // a b c ... z
+        
+        System.out.println();
+        
+        printer.setStrategy(new ReverseStrategy());
+        printer.print();  // z y x ... a
+    }
+}
